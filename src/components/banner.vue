@@ -39,7 +39,7 @@
 </script>
 <style lang="less">
   .banner{
-    // height: 2.84rem;
+    height: 2.83rem;
     overflow: hidden;
     .swiper-container{
       height: 100%;
