@@ -113,7 +113,6 @@ export default {
       // 分享到朋友圈
       wx.onMenuShareTimeline({
         title: title,
-        desc: desc,
         link: link,
         imgUrl: imgUrl,
         success () {
