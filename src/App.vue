@@ -22,6 +22,7 @@
         link: `${window.location.href}?share=1`,
         imgUrl: 'http://mn.dev.ziseyiliao.com/spa/share_image@2x.png',
         success () {
+          console.log(this.shareShow)
           this.shareShow && (this.shareShow = false)
         }
         })
