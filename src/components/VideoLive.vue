@@ -105,6 +105,7 @@
 
   .video-live{
     position: relative;
+    height: 2.83rem;
     background: rgba(0, 0, 0, .5);
     z-index: 2;
     .bg{
