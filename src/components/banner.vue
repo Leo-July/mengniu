@@ -4,6 +4,7 @@
       <!-- slides -->
       <swiper-slide><img src="../assets/banner1@2x.png" alt=""></swiper-slide>
       <swiper-slide><img src="../assets/banner2@2x.png" alt=""></swiper-slide>
+      <swiper-slide><a href="//s.mengniuarla.com/mMms/Dudu"><img src="../assets/banner3@2x.png" alt=""></a></swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
@@ -39,7 +40,6 @@
 </script>
 <style lang="less">
   .banner{
-    height: 2.83rem;
     overflow: hidden;
     .swiper-container{
       height: 100%;

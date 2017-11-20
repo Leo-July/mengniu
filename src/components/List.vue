@@ -2,15 +2,15 @@
   <div class="list">
 
     <!--往期视频-->
-    <my-title v-if="videoData.length > 0" text="往期视频"></my-title>
+    <my-title v-if="videoData.length > 0" imgUrl="./static/videoPast_title@2x.png"></my-title>
     <ul class="past video-past">
       <list-item v-for="item in videoData" :data = "item" class="looked"></list-item>
     </ul>
 
     <!--音频回放-->
-    <my-title v-if="audioData.length > 0" text="音频回放"></my-title>
+    <my-title v-if="audioData.length > 0" imgUrl="./static/audioPast_title@2x.png"></my-title>
     <ul class="past audio-past">
-      <list-item v-for="item in audioData" :data = "item" class="listened"></list-item>
+      <list-item v-for="item in audioData" :data = "item" type="audio" class="listened"></list-item>
     </ul>
   </div>
 </template>
@@ -62,7 +62,7 @@
 
   .list{
     position: relative;
-    padding: .6rem 0 0;
+    padding: .6rem 0 1.45rem;
     background: url("@{imageUrl}repeat_bg@2x.png") repeat-y center top 1.85rem / cover;
     &:before, &:after{
       content: "";
@@ -75,12 +75,11 @@
       top: 0;
       height: 1.85rem;
       background: url("@{imageUrl}top_bg@2x.png")no-repeat center / cover;
-      // background: red;
     }
     &:after{
-      bottom: -1.45rem;
+      bottom: 0;
       height: 4.13rem;
-      background: url("@{imageUrl}bottom_bg@2x.png")no-repeat center / cover;
+      background: url("@{imageUrl}bottom_bg@2x.png") no-repeat center / cover;
     }
     .past{
       position: relative;

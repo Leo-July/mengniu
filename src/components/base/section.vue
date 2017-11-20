@@ -19,9 +19,10 @@
   
   .section{
     padding: .3rem 0 .15rem .32rem;
-    margin-bottom: .15rem;
+    margin-bottom: .12rem;
     color: #2D9B3D;
     .font-size(.16rem);
+    .en-break();
     font-weight: 500;
     border-bottom: 1px dashed #ccc;
     background: url("@{imageUrlDep}section_icon@3x.png") no-repeat left bottom .12rem;

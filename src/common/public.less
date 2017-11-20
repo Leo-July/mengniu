@@ -1,7 +1,7 @@
 @image: "./assets/";
 @imageUrl: "../assets/";
 @imageUrlDep: "../../assets/";
-
+@transition: all .5s ease;
 .font-size(@size){
   font-size: @size;
   line-height: @size;
@@ -15,4 +15,8 @@
    word-wrap: break-word;
    word-break: break-all;
    overflow:hidden;
+}
+.en-break(){
+  word-wrap: break-word;
+  word-break: break-all;
 }

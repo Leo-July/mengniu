@@ -5,16 +5,16 @@
     </div>
     <div class="inner">
       <!--标题-->
-      <my-title text="视频直播"></my-title>
+      <my-title :imgUrl="`./static/videoLive_title@2x.png`"></my-title>
       <!--内容-->
       <div class="content">
         <a class="link" @click="jump">
 
           <div class="desc">
-            <status :data="status" class="status"></status>
+            <status :data="status" class="status" :time="liveData.startTime"></status>
             <h3 class="title">“{{ liveData.title }}”</h3>
-            <p v-if="liveData.startTime" class="date">{{ liveData.startTime | time}}</p>
-            <p class="video-icon"></p>
+            <!--<p v-if="liveData.startTime" class="date">{{ liveData.startTime | time}}</p>-->
+            <!--<p class="video-icon"></p>-->
           </div>
 
           <!--主讲人信息-->
@@ -45,7 +45,7 @@
     },
     data () {
       return {
-        status: 2, // 直播状态
+        status: 2, // 直播状态 2 default     1 正在直播   0 预告状态
         liveData: {}
       }
     },
@@ -105,16 +105,29 @@
 
   .video-live{
     position: relative;
-    background: rgba(0, 0, 0, .5);
     z-index: 2;
     .bg{
       position: absolute;
       top: 1.13rem;
       left: 50%;
       transform: translate3d(-50%, 0, 0);
-      width: 3.07rem;
+      width: 4.76rem;
       height: 2.12rem;
-      z-index: 1;
+      img{
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%,-50%,0);
+      }
+      &:after{
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, .3);
+      }
     }
     .inner{
       position: relative;
@@ -122,7 +135,6 @@
       height: 4.78rem;
       box-sizing: border-box;
       background: url(../assets/video_bg@2x.png) no-repeat center / cover;
-      z-index: 2;
       .content{
         margin-top: .12rem;
         height: 3.27rem;
@@ -131,6 +143,7 @@
         .link{
           display: block;
           .desc{
+            position: relative;
             padding-top: .36rem;
             height: 2.2rem;
             box-sizing: border-box;
@@ -138,17 +151,23 @@
               margin-left: .9rem;
             }
             .title{
-              margin: .11rem .72rem 0;
+              margin: .31rem .72rem 0;
               .font-size(.20rem);
+              .en-break();
               line-height: .24rem;
+              clear: both;
             }
             .date{
               margin: .03rem 0 .07em;
               .font-size(.14rem);
             }
-            .video-icon{
+            &:after{
+              content: "";
+              position: absolute;
+              bottom: .3rem;
+              left: 50%;
+              transform: translate3d(-50%, 0, 0);
               @width: .48rem;
-              display: inline-block;
               width: @width;
               height: @width;
               border-radius: 50%;

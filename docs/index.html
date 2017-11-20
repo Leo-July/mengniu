@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <title>./docs</title>
+  <link rel="stylesheet" href="https://unpkg.com/docute@3/dist/docute.css">
+</head>
+
+<body>
+  <div id="app">
+  </div>
+  <script src="https://unpkg.com/docute@3/dist/docute.js"></script>
+  <script src="https://unpkg.com/docute/plugins/docsearch.js"></script>
+  <script>
+    docute.init({
+      // plugins: [
+      //   // the docsearch variable is provided by docsearch plugin
+      //   docsearch({
+      //     apiKey: 'You API Key',
+      //     indexName: 'Your Index Name',
+      //     // this plugin requires a url too
+      //     // it indicates where docsearch fetches contents
+      //     url: 'https://docute.js.org'
+      //   })
+      // ],
+      // url: '../README',
+      // url: 'https://cdn-to-markdown-files.com/',
+      // home: 'https://raw.githubusercontent.com/egoist/docute/master/README.md',
+      sidebar: true,
+      debug: true,
+      nav: [
+        // page doc
+        {
+          title: 'Page',
+          path: '/page'
+        },
+        // compontents
+        {
+          title: 'compontents',
+          path: '/'
+        }
+      ]
+    })
+
+  </script>
+</body>
+
+</html>

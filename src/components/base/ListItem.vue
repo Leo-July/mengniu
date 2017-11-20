@@ -13,18 +13,19 @@
           <span class="name">{{data.name}}</span> 
           <span class="profession">{{data.professionTitle}}</span>
         </p>
-        <p class="hospital">{{data.hospitalName}}</p>
+        <p class="hospital">{{data.hospitalName}} {{data.departmentName}}</p>
         <p class="date-visited">
           <span v-if="data.startTime" class="date">{{data.startTime | time}}</span>
           <span class="visited">{{data.visited}}</span>
         </p>
       </div>
     </div>
-    <a class="button" :href="data.link">点击播放</a>
+    <div class="button" @click="play"></div>
   </li>
 </template>
 
 <script>
+  import promise from '@/api/fetch'
   export default {
     name: 'ListItem',
     props: {
@@ -44,12 +45,34 @@
             visited: '2000' // 访问量
           }
         }
+      },
+      type: {
+        type: String,
+        default: 'video'
       }
     },
     filters: {
       time (value) {
         value = new Date(parseInt(value) * 1000)
         return `${value.getFullYear()}.${value.getMonth() + 1}.${value.getDate()}`
+      }
+    },
+    methods: {
+      play () {
+        let nowTime = new Date().getTime()
+        if (this.data.startTime * 1000 > nowTime && this.type === 'video') {
+          this.$router.push({
+            path: '/foreshow',
+            query: {courseId: this.data.id}
+          })
+        } else {
+          promise.fetch({
+            url: 'index.php?a=Course&m=lockCourse',
+            data: {courseId: this.data.id}
+          }).then(res => {
+            (parseInt(res.data.code) === 1) && (location.href = this.data.link)
+          })
+        }
       }
     }
   }
@@ -72,6 +95,11 @@
           background: url("@{imageUrlDep}looked_icon@3x.png")no-repeat center / contain;
         }
       }
+      .button{
+        &:after{
+          content: "\70b9\51fb\64ad\653e"
+        }
+      }
     }
     &.listened{
       .visited{
@@ -79,14 +107,18 @@
           background: url("@{imageUrlDep}listened_icon@3x.png")no-repeat center / contain;
         }
       }
+      .button{
+        &:after{
+          content: "\70b9\51fb\6536\542c"
+        }
+      }
     }
     .title{
       margin-bottom: .2rem;
       .font-size(.18rem);
-      line-height: .2rem;
+      line-height: .22rem;
       font-weight: 500;
       color: #2D9B3D;
-      .ignore(1);
     }
     .content{
       display: flex;
@@ -94,6 +126,7 @@
       .portrait{
         @width: .63rem;
         margin-right: .08rem;
+        width: @width;
         flex: 0 0 @width;
         height: @width;
         border: 1px solid #259E39;
@@ -116,7 +149,7 @@
           }
         }
         .hospital{
-          line-height: .16rem;
+          line-height: .18rem;
           .ignore(1);
         }
         .date{

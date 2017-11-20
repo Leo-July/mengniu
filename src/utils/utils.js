@@ -14,20 +14,18 @@ export default {
       let callback = opt.callback || function () {}
       let div = document.createElement('div')
       let text = ''
-      if (error.response) {
-        let status = error.response.status
-        if (status == '404') {
-          text = '请求地址貌似有问题'
-        } 
-      } else if (error.request) {
+      if (error.message) {
         if (error.message.match('timeout')) {
           text = '网络超时,请重新进入'
+        } else if (error.message.match('Network Error')) {
+          text = '您貌似断网了,请稍后重试~'
         } else {
           text = error.message
         }
       } else {
-        text = error.message || error
+        text = error
       }
+
       div.classList.add('tip-info-wrapper')
       div.innerHTML = text
       document.body.appendChild(div)
@@ -64,6 +62,8 @@ export default {
       promise.fetch({
         url: '/common.php?a=Index&m=getJsSign&url=' + url
       }).then(res => {
+
+        
         let mySign = res.data.content
         let wxSign = {
           // debug: true,
@@ -140,19 +140,13 @@ export default {
   },
   // 一天的时间区间
   getTimeSection (value) {
-    if (value < 6) {
-      return '凌晨'
-    } if (value >= 6 && value < 8) {
+    if (value < 9) {
       return '早晨'
-    } if (value >= 8 && value < 11) {
+    } if (value >= 9 && value < 12) {
       return '上午'
-    } if (value >= 11 && value < 13) {
-      return '中午'
-    } if (value >= 13 && value < 17) {
+    } if (value >= 12 && value < 18) {
       return '下午'
-    } if (value >= 17 && value < 19) {
-      return '傍晚'
-    } if (value >= 19 && value < 24) {
+    } if (value >= 18 && value <= 24) {
       return '晚上'
     }
   },
@@ -181,13 +175,13 @@ export default {
     var fileref = document.createElement('script');
     fileref.setAttribute("type", "text/javascript");
     // 判断域名是否为https
-    // var ishttps = 'https:' == document.location.protocol ? true: false;
-    // if(ishttps){
-    //     fileref.setAttribute("src", 'https://jic.talkingdata.com/app/h5/v1?appid=' + appId + '&vn=' + versionName + '&vc=' + versionId)
-    // }else{
-    //     fileref.setAttribute("src", 'http://sdk.talkingdata.com/app/h5/v1?appid=' + appId + '&vn=' + versionName + '&vc=' + versionId)
-    // }
-    fileref.setAttribute("src", '//jic.talkingdata.com/app/h5/v1?appid=' + appId + '&vn=' + versionName + '&vc=' + versionId)
+    var ishttps = 'https:' == document.location.protocol ? true: false;
+    if(ishttps){
+        fileref.setAttribute("src", 'https://jic.talkingdata.com/app/h5/v1?appid=' + appId + '&vn=' + versionName + '&vc=' + versionId)
+    }else{
+        fileref.setAttribute("src", 'http://sdk.talkingdata.com/app/h5/v1?appid=' + appId + '&vn=' + versionName + '&vc=' + versionId)
+    }
+    // fileref.setAttribute("src", '//jic.talkingdata.com/app/h5/v1?appid=' + appId + '&vn=' + versionName + '&vc=' + versionId)
     
     document.getElementsByTagName("head")[0].appendChild(fileref)
 
@@ -208,5 +202,10 @@ export default {
   // 设置title
   setTitle (value) {
     document.querySelector('title').innerHTML = value
+  },
+  // 获取域名
+  getDomain () {
+    let location = window.location.href
+    return location.substring(0, location.indexOf('.com') + 4)
   }
 }

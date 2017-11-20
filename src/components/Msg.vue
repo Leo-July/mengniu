@@ -4,7 +4,7 @@
       <header class="message-hd">
         预约成功
       </header>
-      <p class="message-bd">直播课程预约成功，课程开始30分钟前、5分钟前，您将受到微信公众号的参课提醒消息，请留意微信消息。</p>
+      <p class="message-bd">课程预约成功，课程开始30分钟前、5分钟前，您将受到微信公众号的参课提醒消息，请留意微信消息。</p>
       <p class="message-except">如果您觉得课程不错，欢迎邀请更多小伙伴跟您一起来听课哟  <span class="tip">(点击右上角分享) ~~</span></p>
       <div class="button" @click="hide">我知道了</div>
     </div>
@@ -30,6 +30,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 99;
     &:before{
       content: "";
       position: absolute;
@@ -37,7 +38,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background: rgba(0, 0, 0, .4);
+      background: rgba(0, 0, 0, .7);
     }
     .content{
       position: absolute;

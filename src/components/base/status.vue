@@ -1,6 +1,8 @@
 <template>
-  <header class="status" :class="{'live': parseInt(data) === 1}">{{ data | status}}</header>
+  <header v-if="time === 0" class="status" :class="{'live': parseInt(data) === 1}">{{ data | status }}</header>
+  <header v-else class="status" :class="{'live': parseInt(data) === 1}">{{ data | status}}:  {{ time | week }}</header>
 </template>
+
 <script>
   export default {
     name: 'status',
@@ -8,11 +10,21 @@
       data: {
         type: Number,
         default: 0
+      },
+      time: {
+        type: Number,
+        default: 0
       }
     },
     filters: {
       status (value) {
-        return parseInt(value) === 0 ? '直播预告' : '正在直播'
+        return parseInt(value) === 0 ? '课程预告' : '正在直播'
+      },
+      week (value) {
+        value = new Date (parseInt(value) * 1000)
+        let week = ['日', '一', '二', '三', '四', '五', '六']
+        console.log(value.getDay())
+        return `${value.getMonth() + 1}月${value.getDate()}日周${week[value.getDay()]}`
       }
     }
   }
@@ -21,11 +33,12 @@
   @import '../../common/public.less';
   
   .status{
-    padding: .05rem 0 .04rem;
-    width: .78rem;
+    float: left;
+    padding: .05rem .1rem .04rem;
     .font-size(.12rem);
     text-align: center;
     color: #fff;
+    white-space: pre;
     border-radius: .21rem;
     background: #2D9B3D;
     &.live{

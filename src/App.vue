@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <router-view></router-view>
   </div>
 </template>
@@ -13,16 +13,7 @@
     created () {
       axiosConfig.config()
       utils.getWxConfig()
-    },
-    mounted () {
-    wx.ready(() => {
-      utils.wxShare({
-        title: '\u8499\u725b\u4e13\u5bb6\u5fae\u8bfe\u5802',
-        desc: '\u6700\u5177\u4eb2\u548c\u529b\u7684\u533b\u751f\uff0c\u5206\u4eab\u6700\u5b9e\u7528\u7684\u77e5\u8bc6\uff0c\u8ba9\u4f60\u53d8\u6210\u6700\u7701\u5fc3\u7684\u5988\u5988\u3002',
-        link: `${window.location.href}?share=1`,
-        imgUrl: 'http://mn.dev.ziseyiliao.com/spa/share_image@2x.png'
-        })
-      })
+      utils.initTalkingData('7ED4436BCE714509BA556107BBFB5D9B','','1.0')
     }
   }
 </script>
@@ -36,8 +27,10 @@
     line-height: @size;
   }
   #app{
+    // height: 100%;
     z-index: 9;
     overflow-x: hidden;
+    // overflow: hidden;
   }
   .tip-info-wrapper{
     position: fixed;
@@ -64,9 +57,11 @@
     z-index: 999;
   }
   .fade-enter-active, .fade-leave-active{
-    transition: all 0.5s ease     
+    transition: @transition;
+    // transform-origin: right bottom;
   }
   .fade-enter, .fade-leave-active{
-    opacity: 0
+    opacity: 0;
+    // transform: scale3d(0, 0, 0)
   }
 </style>

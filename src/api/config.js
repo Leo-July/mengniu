@@ -3,7 +3,8 @@ import utils from '@/utils/utils'
 
 export const DBU = false
 export const HTTP_DEV = '//www.easy-mock.com/mock/593e08c38ac26d795fe48c00/mengniu/'
-export const HTTP_PRO = '//mn.dev.ziseyiliao.com/'
+// export const HTTP_PRO = '//mn.dev.ziseyiliao.com/'
+export const HTTP_PRO = utils.getDomain()
 
 export default{
   config () {
@@ -21,6 +22,12 @@ export default{
     axios.interceptors.response.use(function (response) {
       utils.hideLoading()
       if (parseInt(response.data.code) !== 1) {
+        // 兼容客户 推送文章 放错链接导致页面停留时间太长的问题
+        if (+response.data.code === 10021) {
+          console.log('jump to ')
+          window.location.href = 'http://mn.pro.ziseyiliao.com/'
+          return
+        }
         utils.tipInfo({error: response.data.message})
       }
       return response

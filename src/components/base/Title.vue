@@ -1,6 +1,6 @@
 <template>
   <h2 class="title">
-    {{ text }}
+    <img :src="imgUrl" class="text-img"></img>
   </h2>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'title',
   props: {
-    text: {
+    imgUrl: {
       type: String,
       default: 'this title'
     }
@@ -24,11 +24,11 @@ export default {
     position: relative;
     margin: 0 .44rem .23rem;
     height: .3rem;
-    .font-size(.28rem);
-    font-weight: 500;
     text-align: center;
-    color: #2D9B3D;
     background: url("@{imageUrlDep}title_bg@3x.png") no-repeat center / contain;
     z-index: 2;
+    .text-img{
+      width: 1.12rem;
+    }
   }
 </style>
